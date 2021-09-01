@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rickroll generator</title>
+
+    <link rel="stylesheet" href="https://nihalnavath.com/global.css">
+    <link rel="stylesheet" href="../css/style.css">
+
+    <script src="../js/rickrollGenerator.js"></script>
+</head>
+<body>
+    <div class="text-center"> 
+        <div class="creation-cont text-center flex-vertical"> 
+            <input id="title" type="text" name="title"placeholder="Title REQUIRED" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
+            <textarea type="text" name="description" placeholder="Description (WIP, not yet implemented)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em;"></textarea>
+            <button onclick="generateRickroll()">Generate Link!</button>
+        </div>
+
+        <div>
+            <h1>Link Generated:</h1> <br>
+            <a id="rr-link"></a>
+        </div>
+    </div>
+    <!-- <script src = "https://nihalnavath.com/Hit-Notifier.js"> </script> -->
+</body>
+</html>
