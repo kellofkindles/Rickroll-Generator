@@ -15,7 +15,8 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts*', (req, res) => {
-    res.redirect('https://www.youtube.com/watch?v=dQw4w9WgXcQ');
+    console.log(`lmfao got a person at ${req.ip}`)
+    res.sendFile(__dirname + "/public/html/rickroll.html");
 })
 
 
