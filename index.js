@@ -15,7 +15,9 @@ app.get('/', (req, res) => {
 })
 
 app.get('/posts*', (req, res) => {
-    console.log(`lmfao got a person at ${req.ip}`)
+    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    console.log(`lmfao got a person at ${ip}`)
+
     res.sendFile(__dirname + "/public/html/rickroll.html");
 })
 
