@@ -1,1 +1,10 @@
+#ENV
 *.env
+
+#SSL
+*.key
+*.cert
+*.pem
+
+#NODE_MODULES
+/node_modules

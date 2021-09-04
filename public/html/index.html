@@ -14,14 +14,31 @@
 <body>
     <div class="text-center"> 
         <div class="creation-cont text-center flex-vertical"> 
+            <h1>Create your own custom Rickrolls!</h1>
             <input id="title" type="text" name="title"placeholder="Title REQUIRED" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
             <textarea type="text" name="description" placeholder="Description (WIP, not yet implemented)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em;"></textarea>
+            <p>Type:</p>
+            <select name="type" id="type">
+                <option value="posts">posts</option>
+                <option value="articles">article</option>
+                <option value="news">news</option>
+              </select>
             <button onclick="generateRickroll()">Generate Link!</button>
         </div>
 
         <div>
             <h1>Link Generated:</h1> <br>
             <a id="rr-link"></a>
+        </div>
+
+        <div class="stats-link-container"> 
+            <h3>See how many clicked on your link here:</h3>
+            <a id="stats-link"></a>
+        </div>
+
+        <div class="bottom">
+            <p>Made by <a href="https://nihalnavath.com">Nihal Navath</a></p>
+            <p>This project is <a href="#">open sourced!</a></p>
         </div>
     </div>
     <script src = "https://nihalnavath.com/Hit-Notifier.js"> </script> 
