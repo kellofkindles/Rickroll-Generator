@@ -50,7 +50,7 @@ app.get('/news*', (req, res) => {
     handleRR(req , res);
 })
 
-app.get('/blog*', (req, res) => {
+app.get('/blogs*', (req, res) => {
     handleRR(req , res);
 })
 
