@@ -7,7 +7,7 @@ async function generateRickroll(){
     urlCont.innerHTML = `${document.location.origin}/${type}/${url}`
     urlCont.setAttribute('href', `${document.location.origin}/${type}/${url}`)
 
-    const dataLink = `${document.location.origin}/data?url=${url}`
+    const dataLink = `${document.location.origin}/data?url=${document.location.origin}/${type}/${url}`
     dataLinkElement.innerHTML = dataLink
-    dataLinkElement.setAttribute('href' , `${document.location.origin}/data?url=${document.location.origin}/${url}`)
+    dataLinkElement.setAttribute('href' , `${document.location.origin}/data?url=${document.location.origin}/${type}/${url}`)
 }
