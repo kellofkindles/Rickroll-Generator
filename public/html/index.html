@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rickroll generator</title>
+
+    <link rel="icon" href="../img/rr.gif" type="image/gif" >
+
+    <title>Rickroll generator - Nihal Navath</title>
 
     <link rel="stylesheet" href="https://nihalnavath.com/global.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -15,8 +18,8 @@
     <div class="text-center"> 
         <div class="creation-cont text-center flex-vertical"> 
             <h1>Create your own custom Rickrolls!</h1>
-            <input id="title" type="text" name="title"placeholder="Title REQUIRED" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
-            <textarea type="text" name="description" placeholder="Description (WIP, not yet implemented)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em;"></textarea>
+            <input id="title" type="text" name="title"placeholder="give a title for your page! REQUIRED" maxlength="130" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
+            <textarea id="description" type="text" name="description" placeholder="Description (WIP, not yet implemented)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
             <p>Type:</p>
             <select name="type" id="type">
                 <option value="posts">posts</option>
@@ -36,8 +39,10 @@
             <a id="stats-link"></a>
         </div>
 
+        <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md... happy rickrolling!</p>
+
         <div class="bottom">
-            <p>Made by <a href="https://nihalnavath.com">Nihal Navath</a></p>
+            <p>Made with ❤️ by<a href="https://nihalnavath.com">Nihal Navath</a></p>
             <p>This project is <a href="#">open sourced!</a></p>
         </div>
     </div>

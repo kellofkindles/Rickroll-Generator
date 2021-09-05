@@ -4,11 +4,26 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+
+    <link rel="stylesheet" href="https://nihalnavath.com/global.css">
+    <link rel="stylesheet" href="../css/stats.css">
+
+    <meta http-equiv="refresh" content="10">
+
+    <title><%= noClicks %> | Stats for - <%= title %> | Nihal Navath</title>
 </head>
-<body>
+<body class="text-center">
     <h1>Stats</h1>
 
-    <h3>Your link has been used: <%= noClicks %></h3>
+    <p class="huge">Your link has been used: <b><%= noClicks %></b> time(s)!</p>
+
+    <p>Your link:<br> <%= title %></p>
+
+    <p class="text-muted">Info: Data should auto update with max delay of 10 seconds.</p>
+
+    <footer class="flex-horizontal flex-responsive center">
+        <p><a href="https://nihalnavath.com">Made by Nihal Navath</a></p> 
+        <p><a href="news.rr.nihalnavath.com">Back to main site</a> </p>
+    </footer>
 </body>
 </html>

@@ -8,10 +8,9 @@ const fs = require('fs');
 
 const { MongoClient } = require('mongodb');
 
-let collection;
-let database;
-
+const bodyParser = require('body-parser').json();
 const dotenv = require("dotenv");
+//const { title } = require("process");
 dotenv.config();
 
 const URL = process.env.mongourl
@@ -19,6 +18,10 @@ const mongoClient = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopo
 
 const PORT = process.env.port || 3000;
 const httpPORT = process.env.httpport || 8080
+
+let collection;
+let database;
+let info = {}
 
 app = express()
 
@@ -56,16 +59,28 @@ app.get('/blogs*', (req, res) => {
 
 app.get('/data', async (req , res) => {
     const params = req.query
-    console.log(params)
     result = await collection.findOne({_id:params.url})
 
-    res.render('stats', {noClicks: result ? result.value : 0})
+    res.render('stats', {noClicks: result ? result.value : 0 , title: params.url})
 })
 
-async function create(req , url , result){
+app.post('/gen/rr', bodyParser, (req, res) => {
+    console.log("Got a request for creating RR!")
+    const params = req.body
+    
+    if (!params.url || !params.title){
+        res.status(400).send({error: "bad request"})
+    }
+
+    info.url = {title: params.title , description: params.description}
+    console.log(info)
+    //keep title and descp in an array in {} then use when needed
+})
+
+async function create(url , title , descp , result){
     const cDateTime = new Date();
     if (!result){
-        await collection.insertOne({_id: url , value:0 , createDate:cDateTime})
+        await collection.insertOne({_id: url , value:0 , title , description: descp , createDate:cDateTime})
         console.log(`created index for url ${url}!`)
     }
 }
@@ -82,8 +97,21 @@ async function handleRR(req , res){
 
     result = await collection.findOne({_id:url})
 
-    if (!result) {
-        create(req , url , result)
+    if (result){
+        console.log(result)
+        console.log("result is valid A^^^^^")
+        title = result.title //maybe here
+        if (result.description){
+            descp = result.description
+        } else {
+            descp = ""
+        }
+    } else {
+        console.log(`url = ${info.url}`)
+        title = info.url.title
+        descp = info.url.description || ""
+        create(url , title , descp , result)
+        //todo - pop url key from info 
     }
 
     //add count 
@@ -92,7 +120,7 @@ async function handleRR(req , res){
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     console.log(`lmfao got a person at ${ip}`)
 
-    res.sendFile(__dirname + "/public/html/rickroll.html");
+    res.render('rickroll', {title, description: descp});
 }
 
 const options = {
