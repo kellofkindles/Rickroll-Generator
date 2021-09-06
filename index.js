@@ -74,15 +74,15 @@ app.post('/gen/rr', bodyParser, (req, res) => {
         res.status(400).send({error: "bad request"})
     }
 
-    info.url = {title: params.title , description: params.description}
+    info.url = {title: params.title , description: params.description , ImgUrl: params.ImgUrl}
     console.log(info)
     //keep title and descp in an array in {} then use when needed
 })
 
-async function create(url , title , descp , result){
+async function create(url , title , descp , ImgUrl , result){
     const cDateTime = new Date();
     if (!result){
-        await collection.insertOne({_id: url , value:0 , title , description: descp , createDate:cDateTime})
+        await collection.insertOne({_id: url , value:0 , title , description: descp , ImgUrl , createDate:cDateTime})
         console.log(`created index for url ${url}!`)
     }
 }
@@ -106,11 +106,18 @@ async function handleRR(req , res){
         } else {
             descp = ""
         }
+
+        if (result.ImgUrl){
+            ImgUrl = result.ImgUrl
+        } else {
+            ImgUrl = ""
+        }
     } else {
         console.log(`url = ${info.url}`)
         title = info.url.title
         descp = info.url.description || ""
-        create(url , title , descp , result)
+        ImgUrl = info.url.ImgUrl || ""
+        create(url , title , descp , ImgUrl, result)
         
         //todo - pop url key from info 
     }

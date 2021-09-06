@@ -2,6 +2,7 @@ function generateRickroll(){
     const url = encodeURI(document.getElementById("title").value);
     const desc = document.getElementById("description").value;
     const title  = document.getElementById("title").value;
+    const ImgUrlValue = document.getElementById("ImgUrl").value;
     const urlCont = document.getElementById("rr-link");
     const dataLinkElement = document.getElementById("stats-link");
     const type = document.getElementById("type").value;
@@ -21,7 +22,8 @@ function generateRickroll(){
         body: JSON.stringify({
             url: url, 
             title: title, 
-            description: desc
+            description: desc,
+            ImgUrl: ImgUrlValue
         }),
     };
     fetch('/gen/rr' , options)
