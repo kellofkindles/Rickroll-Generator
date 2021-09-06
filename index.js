@@ -130,7 +130,7 @@ async function handleRR(req , res){
 
     console.log(`Got request throwing the following - ${title},\n descp= ${descp}`)
     console.log(`Got request title - ${typeof title},\n descp= ${typeof descp}`)
-    res.render('rickroll', {title, description: descp});
+    res.render('rickroll', {title, description: descp , ImgUrl});
 }
 
 const options = {
