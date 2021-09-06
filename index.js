@@ -61,7 +61,9 @@ app.get('/blogs*', (req, res) => {
 
 app.get('/data', async (req , res) => {
     const params = req.query
-    result = await collection.findOne({_id:params.url})
+    console.log(req.query)
+    result = await collection.findOne({_id:encodeURI(params.url)})
+    console.log(result)
 
     res.render('stats', {noClicks: result ? result.value : 0 , title: params.url})
 })
@@ -100,23 +102,23 @@ async function handleRR(req , res){
     result = await collection.findOne({_id:url})
 
     if (result){
-        title = result.title //maybe here
+        const title = result.title //maybe here
         if (result.description){
-            descp = result.description
+            const descp = result.description
         } else {
-            descp = ""
+            const descp = ""
         }
 
         if (result.ImgUrl){
-            ImgUrl = result.ImgUrl
+            const ImgUrl = result.ImgUrl
         } else {
-            ImgUrl = ""
+            const ImgUrl = ""
         }
     } else {
         console.log(`url = ${info.url}`)
-        title = info.url.title
-        descp = info.url.description || ""
-        ImgUrl = info.url.ImgUrl || ""
+        const title = info.url.title
+        const descp = info.url.description || ""
+        const ImgUrl = info.url.ImgUrl || ""
         create(url , title , descp , ImgUrl, result)
         
         //todo - pop url key from info 
