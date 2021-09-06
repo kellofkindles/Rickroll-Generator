@@ -41,8 +41,10 @@ async function connect() {
 }
 connect().catch(console.dir);
 
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + "/public/html/index.html");
+app.get('/', async (req, res) => {
+    result = await collection.findOne({_id:"TotalRRCount"})
+
+    res.render("index" , {rrCount: result.value || "Error"});
 })
 
 app.get('/posts*', (req, res) => {
@@ -98,8 +100,6 @@ async function handleRR(req , res){
     result = await collection.findOne({_id:url})
 
     if (result){
-        console.log(result)
-        console.log("result is valid A^^^^^")
         title = result.title //maybe here
         if (result.description){
             descp = result.description
@@ -111,6 +111,7 @@ async function handleRR(req , res){
         title = info.url.title
         descp = info.url.description || ""
         create(url , title , descp , result)
+        
         //todo - pop url key from info 
     }
 
@@ -120,6 +121,8 @@ async function handleRR(req , res){
     const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
     console.log(`lmfao got a person at ${ip}`)
 
+    console.log(`Got request throwing the following - ${title},\n descp= ${descp}`)
+    console.log(`Got request title - ${typeof title},\n descp= ${typeof descp}`)
     res.render('rickroll', {title, description: descp});
 }
 

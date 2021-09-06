@@ -8,6 +8,7 @@
     <link rel="icon" href="../img/rr.gif" type="image/gif" >
 
     <title>Rickroll generator - Nihal Navath</title>
+    <meta name="description" content= "Create your own custom rick rolls with title, description and image!" />
 
     <link rel="stylesheet" href="https://nihalnavath.com/global.css">
     <link rel="stylesheet" href="../css/style.css">
@@ -19,7 +20,7 @@
         <div class="creation-cont text-center flex-vertical"> 
             <h1>Create your own custom Rickrolls!</h1>
             <input id="title" type="text" name="title"placeholder="give a title for your page! REQUIRED" maxlength="130" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
-            <textarea id="description" type="text" name="description" placeholder="Description (WIP, not yet implemented)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
+            <textarea id="description" type="text" name="description" placeholder="Description (optional, but recommended)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
             <p>Type:</p>
             <select name="type" id="type">
                 <option value="posts">posts</option>
@@ -42,10 +43,11 @@
         <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md... happy rickrolling!</p>
 
         <div class="bottom">
-            <p>Made with ❤️ by<a href="https://nihalnavath.com">Nihal Navath</a></p>
-            <p>This project is <a href="#">open sourced!</a></p>
+            <h2> <b> <%= rrCount %> victims rickrolled! </b>  </h2>
+            <p>Made with ❤️ by<a href="https://nihalnavath.com" target="_blank">Nihal Navath</a></p>
+            <p>This project is <a href="https://github.com/NihalNavath/Rickroll-Generator" target="_blank">open sourced!</a></p>
         </div>
     </div>
-    <script src = "https://nihalnavath.com/Hit-Notifier.js"> </script> 
+    <!-- <script src = "https://nihalnavath.com/Hit-Notifier.js"> </script>  --> 
 </body>
 </html>

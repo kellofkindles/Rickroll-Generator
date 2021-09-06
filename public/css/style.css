@@ -1,9 +1,23 @@
-html{
+body , html{
     margin: 0;
 }
 
 *{
     margin: 10px;
+}
+
+.text-center{
+    margin: 0;
+}
+
+.input{
+    text-align: center;
+    }
+    ::-webkit-input-placeholder {
+        text-align: center;
+    }
+    :-moz-placeholder {
+        text-align: center;
 }
 
 .creation-cont{
@@ -20,4 +34,10 @@ html{
 
     margin: 0;
     width: 100%;
+}
+
+@media only screen and (max-height: 800px) {
+    .bottom{
+        position: relative;
+    }
 }
