@@ -101,24 +101,29 @@ async function handleRR(req , res){
 
     result = await collection.findOne({_id:url})
 
+    let descp;
+    let ImgUrl;
+    let title;
+
     if (result){
-        const title = result.title //maybe here
+
+        title = result.title //maybe here
         if (result.description){
-            const descp = result.description
+            descp = result.description
         } else {
-            const descp = ""
+            descp = ""
         }
 
         if (result.ImgUrl){
-            const ImgUrl = result.ImgUrl
+            ImgUrl = result.ImgUrl
         } else {
-            const ImgUrl = ""
+            ImgUrl = ""
         }
     } else {
         console.log(`url = ${info.url}`)
-        const title = info.url.title
-        const descp = info.url.description || ""
-        const ImgUrl = info.url.ImgUrl || ""
+        title = info.url.title
+        descp = info.url.description || ""
+        ImgUrl = info.url.ImgUrl || ""
         create(url , title , descp , ImgUrl, result)
         
         //todo - pop url key from info 
