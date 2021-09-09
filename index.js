@@ -47,25 +47,29 @@ app.get('/', async (req, res) => {
     res.render("index" , {rrCount: result.value || "Error"});
 })
 
-app.get('/posts*', (req, res) => {
+app.get('/posts/:url', (req, res) => {
     handleRR(req , res);
 })
 
-app.get('/news*', (req, res) => {
+app.get('/news/:url', (req, res) => {
     handleRR(req , res);
 })
 
-app.get('/blogs*', (req, res) => {
+app.get('/blogs/:url', (req, res) => {
     handleRR(req , res);
 })
 
 app.get('/data', async (req , res) => {
     const params = req.query
-    console.log(req.query)
     result = await collection.findOne({_id:encodeURI(params.url)})
-    console.log(result)
+    type = result ? result.type : 'posts'
 
-    res.render('stats', {noClicks: result ? result.value : 0 , title: params.url})
+    const proxyHost = req.headers["x-forwarded-host"];
+    const host = proxyHost ? proxyHost : req.headers.host //thanks to express for deprecating `host`
+    link = `${req.protocol}://${host}/${type}/${params.url}`
+
+
+    res.render('stats', {noClicks: result ? result.value : 0 , title: encodeURI(params.url), link})
 })
 
 app.post('/gen/rr', bodyParser, (req, res) => {
@@ -76,21 +80,27 @@ app.post('/gen/rr', bodyParser, (req, res) => {
         res.status(400).send({error: "bad request"})
     }
 
-    info.url = {title: params.title , description: params.description , ImgUrl: params.ImgUrl}
+    randString = Math.random().toString(16).substr(2, 8);
+    url = `${params.url}-${randString}` 
+
+    const cDateTime = new Date();
+
+    info[url] = {title: params.title , description: params.description , type: params.type, ImgUrl: params.ImgUrl, createTime: cDateTime}
     console.log(info)
-    //keep title and descp in an array in {} then use when needed
+    
+    return res.json({url})
 })
 
-async function create(url , title , descp , ImgUrl , result){
+async function create(url , title , descp , type , ImgUrl , result){
     const cDateTime = new Date();
     if (!result){
-        await collection.insertOne({_id: url , value:0 , title , description: descp , ImgUrl , createDate:cDateTime})
+        await collection.insertOne({_id: url , value:0 , title , description: descp , type , ImgUrl , createDate:cDateTime})
         console.log(`created index for url ${url}!`)
     }
 }
 
 async function handleRR(req , res){
-    url = req.protocol + '://' + req.get('host') + req.originalUrl;
+    const url = encodeURI(req.params.url);
     console.log(`protocol = ${url}`);
     const value = {
         $inc: {
@@ -102,41 +112,32 @@ async function handleRR(req , res){
     result = await collection.findOne({_id:url})
 
     let descp;
+    let type;
     let ImgUrl;
     let title;
 
     if (result){
-
-        title = result.title //maybe here
-        if (result.description){
-            descp = result.description
-        } else {
-            descp = ""
-        }
-
-        if (result.ImgUrl){
-            ImgUrl = result.ImgUrl
-        } else {
-            ImgUrl = ""
-        }
+        title = result.title 
+        descp = result.description || null
+        type = result.type || null
+        ImgUrl = result.ImgUrl || null
     } else {
-        console.log(`url = ${info.url}`)
-        title = info.url.title
-        descp = info.url.description || ""
-        ImgUrl = info.url.ImgUrl || ""
-        create(url , title , descp , ImgUrl, result)
+        title = info[url].title 
+        descp = info[url].description || null
+        type = info[url].type || null
+        ImgUrl = info[url].ImgUrl || null
+        create(url , title , descp , type, ImgUrl, result)
         
         //todo - pop url key from info 
+        //todo - make handler for custom entered urls
     }
 
     //add count 
     await collection.updateOne({_id:url} , value)
 
-    const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
-    console.log(`lmfao got a person at ${ip}`)
+    const loc = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
+    console.log(`lmfao got a person at ${loc}`)
 
-    console.log(`Got request throwing the following - ${title},\n descp= ${descp}`)
-    console.log(`Got request title - ${typeof title},\n descp= ${typeof descp}`)
     res.render('rickroll', {title, description: descp , ImgUrl});
 }
 

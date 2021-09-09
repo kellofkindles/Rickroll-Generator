@@ -1,4 +1,4 @@
-function generateRickroll(){
+async function generateRickroll(){
     const url = encodeURI(document.getElementById("title").value);
     const desc = document.getElementById("description").value;
     const title  = document.getElementById("title").value;
@@ -6,13 +6,6 @@ function generateRickroll(){
     const urlCont = document.getElementById("rr-link");
     const dataLinkElement = document.getElementById("stats-link");
     const type = document.getElementById("type").value;
-
-    urlCont.innerHTML = `${document.location.origin}/${type}/${url}`
-    urlCont.setAttribute('href', `${document.location.origin}/${type}/${url}`)
-
-    const dataLink = `${document.location.origin}/data?url=${document.location.origin}/${type}/${url}`
-    dataLinkElement.innerHTML = dataLink
-    dataLinkElement.setAttribute('href' , `${document.location.origin}/data?url=${document.location.origin}/${type}/${url}`)
 
     const options = {
         method: 'post',
@@ -23,9 +16,25 @@ function generateRickroll(){
             url: url, 
             title: title, 
             description: desc,
+            type: type,
             ImgUrl: ImgUrlValue
         }),
     };
-    fetch('/gen/rr' , options)
+    response = await fetch('/gen/rr' , options)
+        .then ((response) => {
+            if (response.ok){
+                return response.json()
+            } else {
+                //errorDIV.innerHTML = "" todo
+                throw new Error(`Server responded with ${response.status} -_-`)
+            }
+        })
         .catch(error => console.log(error) );
+
+    urlCont.innerHTML = `${document.location.origin}/${type}/${response.url}`
+    urlCont.setAttribute('href', `${document.location.origin}/${type}/${response.url}`)
+
+    const dataLink = `${document.location.origin}/data?url=${response.url}`
+    dataLinkElement.innerHTML = dataLink
+    dataLinkElement.setAttribute('href' , dataLink)
 }
