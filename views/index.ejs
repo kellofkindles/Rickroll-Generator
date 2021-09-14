@@ -36,45 +36,46 @@
     <script src="../js/rickrollGenerator.js"></script>
 </head>
 <body>
-    <div class="text-center"> 
-        <div class="creation-cont text-center flex-vertical"> 
-            <h1>Create your own custom Rickrolls!</h1>
-            <input id="title" type="text" placeholder="give a title for your page! REQUIRED" maxlength="130" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
-            <textarea id="description" type="text" placeholder="Description (optional, but recommended)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
-            <input id="ImgUrl" type="text" placeholder="Image URL, make sure it ends with a valid image type, ie: .png/.jpeg etc  (optional)" maxlength="500" style="width: 50%;margin-bottom: 10px;max-width: 40em;"></input>
-            <p>Type:</p>
-            <select name="type" id="type">
-                <option value="posts">posts</option>
-                <option value="blogs">blogs</option>
-                <option value="news">news</option>
-              </select>
-            <button onclick="generateRickroll()">Generate Link!</button>
+        <div class = "nnavath-aad-s no-mob">
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2215439777980632"
+            crossorigin="anonymous"></script>
+            <!-- 300x300 -->
+            <ins class="adsbygoogle"
+                style="display:inline-block;width:300px;height:300px"
+                data-ad-client="ca-pub-2215439777980632"
+                data-ad-slot="7187511953"></ins>
+            <script>
+                (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
         </div>
 
-        <div>
-            <h2>Link Generated:</h2> <br>
-            <a id="rr-link"></a>
-        </div>
+        <div class="text-center"> 
+            <div class="creation-cont text-center flex-vertical"> 
+                <h1>Create your own custom Rickrolls!</h1>
+                <input id="title" type="text" placeholder="give a title for your page! REQUIRED" maxlength="130" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
+                <textarea id="description" type="text" placeholder="Description (optional, but recommended)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
+                <input id="ImgUrl" type="text" placeholder="Image URL, make sure it ends with a valid image type, ie: .png/.jpeg etc  (optional)" maxlength="500" style="width: 50%;margin-bottom: 10px;max-width: 40em;"></input>
+                <p>Type:</p>
+                <select name="type" id="type">
+                    <option value="posts">posts</option>
+                    <option value="blogs">blogs</option>
+                    <option value="news">news</option>
+                </select>
+                <button onclick="generateRickroll()">Generate Link!</button>
+            </div>
 
-        <div class="stats-link-container"> 
-            <h3>See how many clicked on your link here:</h3>
-            <a id="stats-link"></a>
-        </div>
+            <div>
+                <h2>Link Generated:</h2> <br>
+                <a id="rr-link"></a>
+            </div>
 
-        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2215439777980632"
-        crossorigin="anonymous"></script>
-        <!-- MainAD -->
-        <ins class="adsbygoogle"
-            style="display:block"
-            data-ad-client="ca-pub-2215439777980632"
-            data-ad-slot="4007062267"
-            data-ad-format="auto"
-            data-full-width-responsive="true"></ins>
-        <script>
-            (adsbygoogle = window.adsbygoogle || []).push({});
-        </script>
+            <div class="stats-link-container"> 
+                <h3>See how many clicked on your link here:</h3>
+                <a id="stats-link"></a>
+            </div>
 
-        <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md... happy rickrolling!</p>
+            <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md... happy rickrolling!</p>
+    
 
         <div class="bottom">
             <h2> <b> <%= rrCount %> victims rickrolled! </b>  </h2>
