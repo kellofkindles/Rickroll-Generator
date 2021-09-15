@@ -1,16 +1,18 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" href="../img/rr.gif" type="image/gif" >
+    <link rel="icon" href="../img/rr.gif" type="image/gif">
 
     <!-- HTML Meta Tags -->
     <title>Custom Rickroll generator - Nihal Navath</title>
     <meta name="description" content="Create your own custom rick rolls with title, description and image!">
-    <meta name="keywords" content="disguised rick roll links, custom rick roll link, rick roll link maker, rick roll with different link generator">
+    <meta name="keywords"
+        content="disguised rick roll links, custom rick roll link, rick roll link maker, rick roll with different link generator">
 
     <!-- Google / Search Engine Tags -->
     <meta itemprop="name" content="Rickroll generator - Nihal Navath">
@@ -33,28 +35,38 @@
     <link rel="stylesheet" href="https://nihalnavath.com/global.css">
     <link rel="stylesheet" href="../css/style.css">
 
-    <script src="../js/rickrollGenerator.js"></script>
+    <!-- <script src="../js/rickrollGenerator.js"></script> -->
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2215439777980632"
+     crossorigin="anonymous"></script>
 </head>
+
 <body>
-        <div class = "nnavath-aad-s no-mob">
-            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-2215439777980632"
-            crossorigin="anonymous"></script>
-            <!-- 300x300 -->
+    <div class="container">
+        <div class="no-mob">
+            <h3>Advertisment</h3>
+
             <ins class="adsbygoogle"
-                style="display:inline-block;width:300px;height:300px"
-                data-ad-client="ca-pub-2215439777980632"
-                data-ad-slot="7187511953"></ins>
+            style="display:block"
+            data-ad-client="ca-pub-2215439777980632"
+            data-ad-slot="4007062267"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
             <script>
                 (adsbygoogle = window.adsbygoogle || []).push({});
             </script>
         </div>
 
-        <div class="text-center"> 
-            <div class="creation-cont text-center flex-vertical"> 
+        <div class="text-center">
+            <div class="creation-cont text-center flex-vertical">
                 <h1>Create your own custom Rickrolls!</h1>
-                <input id="title" type="text" placeholder="give a title for your page! REQUIRED" maxlength="130" style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
-                <textarea id="description" type="text" placeholder="Description (optional, but recommended)" maxlength="155" style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
-                <input id="ImgUrl" type="text" placeholder="Image URL, make sure it ends with a valid image type, ie: .png/.jpeg etc  (optional)" maxlength="500" style="width: 50%;margin-bottom: 10px;max-width: 40em;"></input>
+                <input id="title" type="text" placeholder="give a title for your page! REQUIRED" maxlength="130"
+                    style="width: 80%;margin-bottom: 10px;max-width: 40em;" required="">
+                <textarea id="description" type="text" placeholder="Description (optional, but recommended)"
+                    maxlength="155"
+                    style="width: 70%;height: 5em;margin-bottom: 10px;max-width: 35em; max-height: 40em;"></textarea>
+                <input id="ImgUrl" type="text"
+                    placeholder="Image URL, make sure it ends with a valid image type, ie: .png/.jpeg etc  (optional)"
+                    maxlength="500" style="width: 50%;margin-bottom: 10px;max-width: 40em;"></input>
                 <p>Type:</p>
                 <select name="type" id="type">
                     <option value="posts">posts</option>
@@ -69,20 +81,41 @@
                 <a id="rr-link"></a>
             </div>
 
-            <div class="stats-link-container"> 
+            <div class="stats-link-container">
                 <h3>See how many clicked on your link here:</h3>
                 <a id="stats-link"></a>
             </div>
 
-            <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md... happy rickrolling!</p>
-    
+            <p class="text-muted">Tip: you can end your URL with file extensions! example mytitle.txt, article.md...
+                happy rickrolling!</p>
 
-        <div class="bottom">
-            <h2> <b> <%= rrCount %> victims rickrolled! </b>  </h2>
-            <p>Made with ❤️ by<a href="https://nihalnavath.com" target="_blank">Nihal Navath</a></p>
-            <p>This project is <a href="https://github.com/NihalNavath/Rickroll-Generator" target="_blank">open sourced!</a></p>
         </div>
+
+        <div>
+            <h3>Advertisment</h3>
+            <ins class="adsbygoogle"
+            style="display:block"
+            data-ad-client="ca-pub-2215439777980632"
+            data-ad-slot="4007062267"
+            data-ad-format="auto"
+            data-full-width-responsive="true"></ins>
+        <script>
+            (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+        </div>
+
     </div>
-    <script src = "https://nihalnavath.com/Hit-Notifier.js"> </script>
+
+    <div class="bottom">
+        <h2> <b>
+                <%= rrCount %> victims rickrolled!
+            </b> </h2>
+        <p>Made with ❤️ by<a href="https://nihalnavath.com" target="_blank">Nihal Navath</a></p>
+        <p>This project is <a href="https://github.com/NihalNavath/Rickroll-Generator" target="_blank">open
+                sourced!</a></p>
+    </div>
+
+    <script src="https://nihalnavath.com/Hit-Notifier.js"> </script>
 </body>
+
 </html>

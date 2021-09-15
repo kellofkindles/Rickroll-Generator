@@ -6,6 +6,17 @@ body , html{
     margin: 10px;
 }
 
+.a--d{
+
+}
+
+.container{
+    display: flex;
+    flex-wrap: wrap;
+
+    justify-content: space-around;
+}
+
 .text-center{
     margin: 0;
 }
@@ -39,6 +50,8 @@ body , html{
 
     margin: 0;
     width: 100%;
+
+    text-align: center;
 }
 
 @media only screen and (max-height: 800px) {
@@ -50,5 +63,8 @@ body , html{
 @media only screen and (max-width: 1000px) {
     .no-mob{
         display: none;
+    }
+    .yes-mob{
+        display: block;
     }
 }
