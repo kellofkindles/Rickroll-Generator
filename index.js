@@ -1,35 +1,30 @@
 const express = require("express");
-const session = require('express-session')
 const path = require("path");
 
-const https = require('https');
-const http = require('http');
 const fs = require('fs');
 
 const { MongoClient } = require('mongodb');
 
 const bodyParser = require('body-parser').json();
 const dotenv = require("dotenv");
-//const { title } = require("process");
+
 dotenv.config();
 
 const URL = process.env.mongourl
 const mongoClient = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const PORT = process.env.port || 3000;
-const httpPORT = process.env.httpport || 8080
 
 let collection;
-let database;
 let info = {}
 
 app = express()
 
 app.use(express.static(path.join(__dirname, "public")));
 app.set('view engine', 'ejs')
-app.use((req, res, next) => {
-    req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
-})
+// app.use((req, res, next) => {
+//     req.secure ? next() : res.redirect('https://' + req.headers.host + req.url)
+// })
 
 async function connect() {
     await mongoClient.connect(); 
@@ -61,11 +56,15 @@ app.get('/blogs/:url', (req, res) => {
 
 app.get('/data', async (req , res) => {
     const params = req.query
+    if (!params.url || params.url === ""){
+        return res.redirect('/');
+    }
+
     result = await collection.findOne({_id:encodeURI(params.url)})
     type = result ? result.type : 'posts'
 
     const proxyHost = req.headers["x-forwarded-host"];
-    const host = proxyHost ? proxyHost : req.headers.host //thanks to express for deprecating `host`
+    const host = proxyHost ? proxyHost : req.headers.host 
     link = `${req.protocol}://${host}/${type}/${params.url}`
 
 
@@ -73,15 +72,15 @@ app.get('/data', async (req , res) => {
 })
 
 app.post('/gen/rr', bodyParser, (req, res) => {
-    console.log("Got a request for creating RR!")
     const params = req.body
     
-    if (!params.url || !params.title){
-        res.status(400).send({error: "bad request"})
+    if (!params.url || !params.title || !params.type || params.title === ""){ 
+        return res.status(400).send({error: "bad request"})
     }
 
     randString = Math.random().toString(16).substr(2, 8);
-    url = `${params.url}-${randString}` 
+    const incompleteUrl = decodeURI(params.url).replace(/\s+/g, '-')
+    const url = `${encodeURI(incompleteUrl)}-${randString}` 
 
     const cDateTime = new Date();
 
@@ -92,6 +91,9 @@ app.post('/gen/rr', bodyParser, (req, res) => {
 })
 
 async function create(url , title , descp , type , ImgUrl , result){
+    if (!title || title === ""){
+        return
+    }
     const cDateTime = new Date();
     if (!result){
         await collection.insertOne({_id: url , value:0 , title , description: descp , type , ImgUrl , createDate:cDateTime})
@@ -100,7 +102,7 @@ async function create(url , title , descp , type , ImgUrl , result){
 }
 
 async function handleRR(req , res){
-    const url = encodeURI(req.params.url);
+    const url = decodeURI(req.params.url);
     console.log(`protocol = ${url}`);
     const value = {
         $inc: {
@@ -146,9 +148,6 @@ const options = {
     cert: fs.readFileSync(__dirname +  '/cert.pem')
 };
 
-http.createServer(app).listen(httpPORT, () => {
-    console.log(`listening on http://localhost:${httpPORT}`);
-});
-https.createServer(options , app).listen(PORT, () => {
-	console.log(`listening on https://localhost:${PORT}`);
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
 });
