@@ -13,7 +13,7 @@ dotenv.config();
 const URL = process.env.mongourl
 const mongoClient = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const PORT = process.env.port || 3000;
+const PORT = process.env.port || 8080;
 
 let collection;
 let info = {}
