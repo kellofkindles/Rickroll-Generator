@@ -13,7 +13,7 @@ dotenv.config();
 const URL = process.env.mongourl
 const mongoClient = new MongoClient(URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
-const PORT = process.env.port || 8080;
+const PORT = process.env.port || 3000;
 
 let collection;
 let info = {}
@@ -142,11 +142,6 @@ async function handleRR(req , res){
 
     res.render('rickroll', {title, description: descp , ImgUrl});
 }
-
-const options = {
-    key: fs.readFileSync(__dirname + '/key.pem'),
-    cert: fs.readFileSync(__dirname +  '/cert.pem')
-};
 
 app.listen(PORT, () => {
     console.log(`Listening on port ${PORT}`);
